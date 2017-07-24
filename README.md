@@ -106,6 +106,8 @@ include ':app'
 
 Before you can make requests using SSL pinning, you first need to add your `.cer` files to your project's assets.
 
+`.cer` files are sometimes encoded in DER format and may be labeled as such. (The other common file type/format is a plain-text encoded file, usually with a `.pem` extension.)
+
 ### Android
 
  - Place your `.cer` files under `src/main/assets/`.
