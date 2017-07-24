@@ -108,7 +108,7 @@ Before you can make requests using SSL pinning, you first need to add your `.cer
 
 ### Android
 
- - Place your `.cer` files under `src/main/assets/`.
+ - Place your `.cer` files under `android/src/main/assets/`. (You may have to create this directory in your project.)
 
 ### iOS
 
