@@ -80,8 +80,8 @@ public class HttpUtil {
         String method = request.method.toUpperCase();
 
         connection = (HttpsURLConnection) url.openConnection();
-        if (request.certFilename != null) {
-            connection.setSSLSocketFactory(KeyPinStoreUtil.getInstance(request.certFilename).getContext().getSocketFactory());
+        if (request.certFilenames != null) {
+            connection.setSSLSocketFactory(KeyPinStoreUtil.getInstance(request.certFilenames).getContext().getSocketFactory());
         }
         connection.setRequestMethod(method);
 
