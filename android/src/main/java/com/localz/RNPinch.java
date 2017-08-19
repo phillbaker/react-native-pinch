@@ -8,7 +8,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 
-import com.facebook.internal.BundleJSONConverter;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -116,12 +115,11 @@ public class RNPinch extends ReactContextBaseJavaModule {
                 }
 
                 HttpResponse httpResponse = httpUtil.sendHttpRequest(request);
-                JSONObject jsonHeaders = new JSONObject(httpResponse.headers.toString());
 
                 response.putInt("status", httpResponse.statusCode);
                 response.putString("statusText", httpResponse.statusText);
                 response.putString("bodyString", httpResponse.bodyString);
-                response.putMap("headers", Arguments.fromBundle(BundleJSONConverter.convertToBundle(jsonHeaders)));
+                response.putMap("headers", httpResponse.headers);
 
                 return response;
             } catch(JSONException | IOException | UnexpectedNativeTypeException | KeyStoreException | CertificateException | KeyManagementException | NoSuchAlgorithmException e) {
