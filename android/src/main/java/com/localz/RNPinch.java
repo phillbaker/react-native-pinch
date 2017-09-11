@@ -39,6 +39,8 @@ public class RNPinch extends ReactContextBaseJavaModule {
     private static final String OPT_BODY_KEY = "body";
     private static final String OPT_SSL_PINNING_KEY = "sslPinning";
     private static final String OPT_TIMEOUT_KEY = "timeoutInterval";
+    private static final String OPT_CERT_KEY = "cert";
+    private static final String OPT_CERTS_KEY = "certs";
 
     private HttpUtil httpUtil;
     private String packageName = null;
@@ -98,11 +100,11 @@ public class RNPinch extends ReactContextBaseJavaModule {
                     request.headers = JsonUtil.convertReadableMapToJson(opts.getMap(OPT_HEADER_KEY));
                 }
                 if (opts.hasKey(OPT_SSL_PINNING_KEY)) {
-                    String fileName = opts.getMap(OPT_SSL_PINNING_KEY).getString("cert");
-                    if (fileName != null) {
+                    if (opts.getMap(OPT_SSL_PINNING_KEY).hasKey(OPT_CERT_KEY)) {
+                        String fileName = opts.getMap(OPT_SSL_PINNING_KEY).getString(OPT_CERT_KEY);
                         request.certFilenames = new String[]{fileName};
-                    } else {
-                        ReadableArray certsStrings = opts.getMap(OPT_SSL_PINNING_KEY).getArray("certs");
+                    } else if (opts.getMap(OPT_SSL_PINNING_KEY).hasKey(OPT_CERTS_KEY)) {
+                        ReadableArray certsStrings = opts.getMap(OPT_SSL_PINNING_KEY).getArray(OPT_CERTS_KEY);
                         String[] certs = new String[certsStrings.size()];
                         for (int i = 0; i < certsStrings.size(); i++) {
                             certs[i] = certsStrings.getString(i);
